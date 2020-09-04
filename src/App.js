@@ -44,12 +44,12 @@ function App() {
       debugger
       showLoader(true)
 
-      axios.post("https://79c359782a60.ngrok.io/facerecognition",queryString.stringify(data))
+      axios.post("http://localhost:5000/facerecognition",queryString.stringify(data))
       .then(function (response) {
         showLoader(false);
         debugger
         const result = response.data;
-        setName(result.name)
+        setName(result.name);
 
           // const start = boxes[0][0];
           // const end = boxes[0][2];
@@ -81,8 +81,9 @@ function App() {
   }, [webcamRef, setCapturing, mediaRecorderRef]);
 
 
-  const submit = (event) => {
+  const liveCamera = (event) => {
     event.preventDefault();
+    showLoader(true)
     axios.post("http://localhost:5000/facerecognitionLive")
     .then(function (response) {
       showLoader(false)
@@ -144,7 +145,12 @@ function App() {
               <div className="introtext">
               {
                 !capturing &&
-                <h2><button className="button1" onClick={() => {setCapturing(true)}}>Start Face Recognition</button></h2>
+                <>
+                  <div>
+                    <h2><button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button></h2>
+                    <h2><button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button></h2>
+                  </div>
+                </>
               }
 
               {
@@ -152,7 +158,7 @@ function App() {
                 <h2><button className="button1" onClick={handleStartCaptureClick}>Capture</button></h2>
               }
 
-                <p>Please try to camputure image within proper brightness.</p>
+                <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
               </div>
             </li>
             <li className="clear featured_slide_Image">
@@ -171,7 +177,6 @@ function App() {
       </div>
       <div className="wrapper col5">
         <div id="footer">
-          <p className="fl_left">Copyright &copy; 2014 - All Rights Reserved - <a href="#">Domain Name</a></p>
           <p className="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
           <br className="clear" />
         </div>
