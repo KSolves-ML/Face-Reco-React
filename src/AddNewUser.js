@@ -55,7 +55,7 @@ const AddNewUser = (props) => {
       }
       showLoader(true);
 
-      axios.post("https://ml-demo.ksolves.com/align_images",queryString.stringify(data))
+      axios.post("https://ml-demo.ksolves.com:5000/align_images",queryString.stringify(data))
       .then(function (response) {
         showLoader(false);
       })
@@ -69,7 +69,7 @@ const AddNewUser = (props) => {
   const createEmbeddings = () => {
       showLoader(true);
 
-      axios.post("https://ml-demo.ksolves.com//create_embeddings")
+      axios.post("https://ml-demo.ksolves.com:5000/create_embeddings")
       .then(function (response) {
         showLoader(false);
       })

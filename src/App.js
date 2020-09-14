@@ -41,7 +41,7 @@ function App(props) {
 
       showLoader(true)
 
-      axios.post("https://ml-demo.ksolves.com/facerecognition",queryString.stringify(data))
+      axios.post("https://ml-demo.ksolves.com:5000/facerecognition",queryString.stringify(data))
       .then(function (response) {
         showLoader(false);
         const result = response.data;
@@ -57,7 +57,7 @@ function App(props) {
   const liveCamera = (event) => {
     event.preventDefault();
     showLoader(true)
-    axios.post("https://ml-demo.ksolves.com//facerecognitionLive")
+    axios.post("https://ml-demo.ksolves.com:5000/facerecognitionLive")
     .then(function (response) {
       showLoader(false)
     })
