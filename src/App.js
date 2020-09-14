@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 import Webcam from "react-webcam";
 import captureVideoFrame from "capture-video-frame";
 import queryString from 'query-string';
 import DotLoader from "react-spinners/DotLoader";
+import Navbar from "./Navbar.js";
 import { css } from '@emotion/core';
 const override = css`
 display: block;
@@ -20,20 +20,15 @@ color: yellow;
 transform: translate(-50%,-50%);
 `;
 
-function App() {
+function App(props) {
   const webcamRef = React.useRef(null);
-  const mediaRecorderRef = React.useRef(null);
-  const [recordedChunks, setRecordedChunks] = React.useState([]);
   const [capturing, setCapturing] = React.useState(false);
   const [isLoading, showLoader] = React.useState(false);
   const [name, setName] = React.useState('');
 
 
-  const handleStartCaptureClick = React.useCallback(() => {
-    let boxes = [];
+  const handleStartCaptureClick = () => {
     const frame = captureVideoFrame("my-video-id", "png");
-    // const newimg = document.getElementById('img');
-    // newimg.setAttribute("src", frame.dataUri);
     const img = new Image()
     img.src = frame.dataUri;
     img.onload = () => {
@@ -41,53 +36,28 @@ function App() {
         file: frame.dataUri,
         format: frame.format,
       }
-      debugger
+
       showLoader(true)
 
-      axios.post("http://localhost:5000/facerecognition",queryString.stringify(data))
+      axios.post("https://ml-demo.ksolves.com/facerecognition",queryString.stringify(data))
       .then(function (response) {
         showLoader(false);
-        debugger
         const result = response.data;
         setName(result.name);
-
-          // const start = boxes[0][0];
-          // const end = boxes[0][2];
-
-          // boxes = boxesPoints.points;
-          // context.drawImage(img, 10, 50, canvas.width, canvas.height)
-          // context.beginPath();
-          // context.lineWidth = "4";
-          // context.strokeStyle = "green";
-          // context.rect(boxes[0][0], boxes[0][1], boxes[0][2]-boxes[0][0], boxes[0][3]-boxes[0][1]);
-          // context.fillStyle = 'green';
-          // context.fillRect(boxes[0][0], boxes[0][1], boxes[0][2]-boxes[0][0], (boxes[0][3]-boxes[0][1])/3);
-          // context.fillStyle = "red";
-          // context.font = "16pt serif";
-          // context.fillText(boxes.name, , 20);
-          // context.stroke();
       })
       .catch(function (error) {
-        debugger
         showLoader(false)
       });
-
     }
-
-      // Upload the image...
-      // const formData = new FormData();
-      // formData.append("file", frame.dataUri, `my-screenshot.${frame.format}`);
-
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+  };
 
 
   const liveCamera = (event) => {
     event.preventDefault();
     showLoader(true)
-    axios.post("http://localhost:5000/facerecognitionLive")
+    axios.post("https://ml-demo.ksolves.com//facerecognitionLive")
     .then(function (response) {
       showLoader(false)
-      debugger
     })
     .catch(function (error) {
       showLoader(false)
@@ -104,31 +74,7 @@ function App() {
          loading={isLoading}
          color={'yellow'}
        />
-      <div className="wrapper col1">
-        <div id="header">
-          <div id="topnav">
-            <ul>
-              <li className="last"><a href="pages/gallery.html">Add New User</a><span>Test Text Here</span></li>
-              <li><a href="#">DropDown</a><span>Test Text Here</span>
-                <ul>
-                  <li><a href="#">Link 1</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                </ul>
-              </li>
-              <li><a href="pages/full-width.html">User List</a><span>Test Text Here</span></li>
-              <li><a href="pages/style-demo.html">Delete User</a><span>Test Text Here</span></li>
-              <li className="active"><a href="#">Face Recongnize</a><span>Test Text Here</span></li>
-            </ul>
-          </div>
-          <div className="fl_left">
-            <h1><a href="index.html">KSOLVES</a></h1>
-            <p>FACE RECOGNITION</p>
-          </div>
-          <br className="clear" />
-        </div>
-      </div>
-
+      <Navbar history={props.history} />
       <div className="wrapper col2">
         <div id="featured_slide_">
           <ul id="featured_slide_Content">

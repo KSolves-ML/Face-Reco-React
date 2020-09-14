@@ -14,7 +14,12 @@
 }
 
 .float-left {
-  width: 100%
+  width: 100%;
+}
+
+.webcam-2 {
+  width: 20%;
+  height:20%;
 }
 
 .App-header {
@@ -30,6 +35,61 @@
 
 .button1 {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button2 {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  float:right;
+}
+
+.App {
+  font-family: sans-serif;
+  /* text-align: center; */
+  background-color: #f6f9fe;
+}
+.image-item {
+  display: flex;
+  margin: 10px 0;
+}
+.image-item__btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+button {
+  height: 40px;
+}
+
+
+.button {
+  float:left;
+  align:center;
+}
+
+.start-training {
+  margin-left: 500px
+}
+
+input[type=text] {
+  width: 400px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid yellow
+}
+
+.imageList {
+  width: 400px;
+}
+
+.clear-both {
+  clear: both;
+}
+
+.addImage {
+  height: 100px;
+  width: 100px;
+  float:left;
 }
 
 .App-link {
