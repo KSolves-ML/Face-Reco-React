@@ -40,7 +40,6 @@ const AddNewUser = (props) => {
 
     newImage.push(frame.dataUri);
     addImage(newImage);
-    debugger
     const imageNo = images.length+1
     const img = document.getElementById("addImage"+imageNo)
     img.src = frame.dataUri
@@ -54,7 +53,6 @@ const AddNewUser = (props) => {
         file4: images[3],
         userName: newUserName,
       }
-      debugger
       showLoader(true);
 
       axios.post("https://ml-demo.ksolves.com/align_images",queryString.stringify(data))
@@ -93,7 +91,6 @@ const AddNewUser = (props) => {
 
   return (
     <>
-    <FileUpload />
     <DotLoader
          css={override}
          sizeUnit={"px"}
@@ -101,7 +98,6 @@ const AddNewUser = (props) => {
          loading={isLoading}
          color={'yellow'}
        />
-      <Navbar history={props.history} />
       <div>
         <div>
           <ul>

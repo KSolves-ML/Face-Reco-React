@@ -4,6 +4,7 @@ import axios from 'axios'
 import Webcam from "react-webcam";
 import captureVideoFrame from "capture-video-frame";
 import queryString from 'query-string';
+import AddNewUser from "./AddNewUser";
 import DotLoader from "react-spinners/DotLoader";
 import Navbar from "./Navbar.js";
 import { css } from '@emotion/core';
@@ -25,6 +26,7 @@ function App(props) {
   const [capturing, setCapturing] = React.useState(false);
   const [isLoading, showLoader] = React.useState(false);
   const [name, setName] = React.useState('');
+  const [newUser, addNewUser] = React.useState(false);
 
 
   const handleStartCaptureClick = () => {
@@ -65,68 +67,82 @@ function App(props) {
     });
   }
 
+  const addNewUserMethod = (event, value) => {
+    event.preventDefault()
+    addNewUser(value);
+  }
+
   return (
     <>
-    <DotLoader
-         css={override}
-         sizeUnit={"px"}
-         size={150}
-         loading={isLoading}
-         color={'yellow'}
-       />
-      <Navbar history={props.history} />
-      <div className="wrapper col2">
-        <div id="featured_slide_">
-          <ul id="featured_slide_Content">
-            <li className="featured_slide_Image">
-            {
-              capturing &&
-              <Webcam audio={false} ref={webcamRef} id="my-video-id" className="float-left"/>
+    <Navbar history={props.history}  addNewUserMethod={addNewUserMethod}/>
 
-            }
-            {
-              !capturing &&
-              <img src={require("./images/demo/big.gif")} />
-            }
-              <div className="introtext">
-              {
-                !capturing &&
-                <>
-                  <div>
-                    <h2><button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button></h2>
-                    <h2><button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button></h2>
+    { !newUser &&
+      <>
+        <DotLoader
+             css={override}
+             sizeUnit={"px"}
+             size={150}
+             loading={isLoading}
+             color={'yellow'}
+           />
+          <div className="wrapper col2">
+            <div id="featured_slide_">
+              <ul id="featured_slide_Content">
+                <li className="featured_slide_Image">
+                {
+                  capturing &&
+                  <Webcam audio={false} ref={webcamRef} id="my-video-id" className="float-left"/>
+
+                }
+                {
+                  !capturing &&
+                  <img src={require("./images/demo/big.gif")} />
+                }
+                  <div className="introtext">
+                  {
+                    !capturing &&
+                    <>
+                      <div>
+                        <h2><button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button></h2>
+                        <h2><button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button></h2>
+                      </div>
+                    </>
+                  }
+
+                  {
+                    capturing &&
+                    <h2><button className="button1" onClick={handleStartCaptureClick}>Capture</button></h2>
+                  }
+
+                    <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
                   </div>
-                </>
-              }
+                </li>
+                <li className="clear featured_slide_Image">
+                </li>
+              </ul>
+            </div>
+            {
+              name && name.length > 0 && name !== 'Unknown' &&
+              <h1 id="resultUser">Welcome {name} </h1>
+            }
 
-              {
-                capturing &&
-                <h2><button className="button1" onClick={handleStartCaptureClick}>Capture</button></h2>
-              }
-
-                <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
-              </div>
-            </li>
-            <li className="clear featured_slide_Image">
-            </li>
-          </ul>
-        </div>
-        {
-          name && name.length > 0 && name !== 'Unknown' &&
-          <h1 id="resultUser">Welcome {name} </h1>
+            {
+              name && name.length > 0 && name === 'Unknown' &&
+              <h1 id="resultUser">{name} Please Try Again </h1>
+            }
+          </div>
+          <div className="wrapper col5">
+            <div id="footer">
+              <p className="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+              <br className="clear" />
+            </div>
+          </div>
+          </>
         }
-
-        {
-          name && name.length > 0 && name === 'Unknown' &&
-          <h1 id="resultUser">{name} Please Try Again </h1>
-        }
-      </div>
-      <div className="wrapper col5">
-        <div id="footer">
-          <p className="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-          <br className="clear" />
-        </div>
-      </div>
+      {
+        newUser &&
+        <AddNewUser />
+      }
     </>
   );
 }
