@@ -86,7 +86,7 @@ function App(props) {
              color={'yellow'}
            />
           <div className="wrapper col2">
-            <div id="featured_slide_">
+            <div className="dark-bg" id="featured_slide_">
               <ul id="featured_slide_Content">
                 <li className="featured_slide_Image">
                 {
@@ -103,17 +103,16 @@ function App(props) {
                     !capturing &&
                     <>
                       <div>
-                        <h2><button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button></h2>
-                        <h2><button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button></h2>
+                        <button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button>
+                        <button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button>
                       </div>
                     </>
                   }
 
                   {
                     capturing &&
-                    <h2><button className="button1" onClick={handleStartCaptureClick}>Capture</button></h2>
+                    <button className="button1" onClick={handleStartCaptureClick}>Capture</button>
                   }
-
                     <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
                   </div>
                 </li>
@@ -130,12 +129,6 @@ function App(props) {
               name && name.length > 0 && name === 'Unknown' &&
               <h1 id="resultUser">{name} Please Try Again </h1>
             }
-          </div>
-          <div className="wrapper col5">
-            <div id="footer">
-              <p className="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
-              <br className="clear" />
-            </div>
           </div>
           </>
         }

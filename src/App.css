@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+
+
+*{
+  font-family: 'Sarabun', sans-serif !important;
+}
+html{
+  height: 100%;
+}
+body{
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background-blend-mode: multiply;
+}
 .App {
   text-align: center;
 }
@@ -79,7 +92,7 @@ input[type=text] {
 }
 
 .imageList {
-  width: 400px;
+  width: 100%;
 }
 
 .clear-both {

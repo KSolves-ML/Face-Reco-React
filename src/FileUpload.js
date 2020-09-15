@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ImageUploading from "react-images-uploading";
+import {Photo, DeleteForever, Update, Cancel} from '@material-ui/icons';
 
 
 function FileUpload(props) {
@@ -19,7 +20,7 @@ function FileUpload(props) {
   };
 
   return (
-    <div className="App">
+    <div>
       <ImageUploading
         multiple
         value={images}
@@ -39,23 +40,27 @@ function FileUpload(props) {
           // write your building UI
           <div className="upload__image-wrapper">
             <button
+              className="button" 
               style={isDragging ? { color: "red" } : null}
               onClick={onImageUpload}
               {...dragProps}
             >
-              Click or Drop here
+              <Photo/>
+              <span>Click or Drop here</span>
             </button>
-            &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image.data_url} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
+            
+            <button className="button"  onClick={onImageRemoveAll}> <DeleteForever/> <span>Remove all images</span></button>
+            <div className="images">
+              {imageList.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img src={image.data_url} alt="" width="100" />
+                  <div className="image-item__btn-wrapper">
+                    <button onClick={() => onImageUpdate(index)}><Update/></button>
+                    <button onClick={() => onImageRemove(index)}><Cancel/></button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>   
           </div>
         )}
       </ImageUploading>

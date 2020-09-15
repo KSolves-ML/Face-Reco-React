@@ -1,12 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
-import axios from 'axios'
+import './style/style.css';
+import axios from 'axios';
 import Webcam from "react-webcam";
 import captureVideoFrame from "capture-video-frame";
 import queryString from 'query-string';
 import DotLoader from "react-spinners/DotLoader";
 import { css } from '@emotion/core';
+import {AddPhotoAlternate, Compare} from '@material-ui/icons';
 import ImageUploader from 'react-images-upload';
 import Navbar from "./Navbar.js";
 import FileUpload from "./FileUpload"
@@ -98,31 +99,31 @@ const AddNewUser = (props) => {
          loading={isLoading}
          color={'yellow'}
        />
-      <div>
-        <div>
-          <ul>
-            <li>
-              <center>
-                <Webcam audio={false} ref={webcamRef} id="my-video-id" className="webcame-2"/>
-                <div className="imageList">
-                  <img src={require("./images/demo/big.gif")} alt="" className="addImage" id="addImage1"/>
-                  <img src={require("./images/demo/big.gif")} className="addImage" alt="" id="addImage2"/>
-                  <img src={require("./images/demo/big.gif")} className="addImage"alt="" id="addImage3"/>
-                  <img src={require("./images/demo/big.gif")}className="addImage" alt="" id="addImage4"/>
-                </div>
-                <div className="clear-both">
-                  <input type="text" value={newUserName} id="userName" onChange={(event) => {setUserName(event.target.value)}} />
-                </div>
-                <div>
-                  <h2><button className="button" onClick={addNewImage}>Add Image</button></h2>
-                  <h2><button className="button" onClick={allignImages}>Start Training</button></h2>
-                  <FileUpload uploadImages={uploadImages} />
-                </div>
-              </center>
-            </li>
-            <li className="clear featured_slide_Image">
-            </li>
-          </ul>
+      <div id="container">
+        <div className="dark-bg">
+          <div className="left-frame">
+            <img src="https://image.freepik.com/free-vector/abstract-flat-face-recognition-background_23-2148189722.jpg" alt="" className="testImage"/>
+            {/* <Webcam audio={false} ref={webcamRef} id="my-video-id" className="webcame-2"/> */}
+            <div className="cam-footer">
+              <div className="imageList">
+                <img src={require("./images/demo/big.gif")} alt="" className="addImage" id="addImage1"/>
+                <img src={require("./images/demo/big.gif")} className="addImage" alt="" id="addImage2"/>
+                <img src={require("./images/demo/big.gif")} className="addImage"alt="" id="addImage3"/>
+                <img src={require("./images/demo/big.gif")}className="addImage" alt="" id="addImage4"/>
+              </div>
+              <div className="input-outer">
+                <input type="text" value={newUserName} placeholder="Add text here" id="userName" onChange={(event) => {setUserName(event.target.value)}} />
+              </div>
+            </div>
+          </div>
+          <div className="button-group">
+            <div>
+              <button className="button" onClick={addNewImage}><AddPhotoAlternate/> <span>Add Image</span></button>
+              <button className="button" onClick={allignImages}><Compare/> <span>Start Training</span></button>
+            </div>
+            <FileUpload uploadImages={uploadImages} />
+          </div>
+            
         </div>
       </div>
     </>

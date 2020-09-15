@@ -8,9 +8,9 @@ Licence URI: http://www.os-templates.com/template-terms
 File: Featured Slider CSS
 */
 
-#featured_slide_{position:relative; /* important */ display:block; width:940px; height:540px; overflow:hidden; /* important */ margin:0 auto; padding:5px; border:5px solid #242424; color:#FFF; background:url("images/stripe.gif") top left repeat #242424;}
+#featured_slide_{position:relative; /* important */ display:block; width:940px; height:540px; overflow:hidden; /* important */ margin:0 auto; padding:5px;  color:#FFF; }
 #featured_slide_Content{width:940px; /* important to be same as image width */ position:absolute; display:inline; margin:0; padding:0; list-style:none;}
-.featured_slide_Image{position:relative; display:none; float:left; margin:0; padding:0; width:940px; /* important - must be same as image width and slider width */ height:540px; /* important - must be same as image height and slider height */ list-style:none;}
+.featured_slide_Image{position:relative; display:none; float:left; margin:0; padding:0; width:940px; /* important - must be same as image width and slider width */ height:528px; /* important - must be same as image height and slider height */ list-style:none;}
 .featured_slide_Image img{width:940px; height:540px;}
 .featured_slide_Image div.introtext{position:absolute; top:450px; left:0; width:920px; padding:20px 10px; color:#fff; background-color:#000; text-align:center; opacity:0.7; display:none;}
 .featured_slide_Image div.introtext .button1 {
