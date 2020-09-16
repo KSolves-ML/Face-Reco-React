@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './logo.svg';
-import './style/style.css';
 import axios from 'axios';
 import Webcam from "react-webcam";
 import captureVideoFrame from "capture-video-frame";
