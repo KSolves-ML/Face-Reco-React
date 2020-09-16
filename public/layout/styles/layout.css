@@ -493,10 +493,11 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
   box-shadow: 0 2px 8px 0 #00000017;
 }
 .dashboard section .product img{
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);  
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   width: 100%;
   border-radius: 8px;
   margin-bottom: 5px;
+  height: 140px;
 }
 .dashboard section .product  .data p{
   border-bottom: 1px solid #eee;
