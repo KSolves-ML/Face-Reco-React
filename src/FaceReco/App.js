@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import axios from 'axios'
 import Webcam from "react-webcam";
@@ -71,6 +71,16 @@ function App(props) {
     event.preventDefault()
     addNewUser(value);
   }
+
+  useEffect(() => {
+  // Update the document title using the browser API
+    const script = document.createElement("script");
+
+    script.src = "layout/scripts/slider.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+  });
 
   return (
     <>
