@@ -102,8 +102,7 @@ const AddNewUser = (props) => {
       <div id="container">
         <div className="dark-bg">
           <div className="left-frame">
-            <img src="https://image.freepik.com/free-vector/abstract-flat-face-recognition-background_23-2148189722.jpg" alt="" className="testImage"/>
-            {/* <Webcam audio={false} ref={webcamRef} id="my-video-id" className="webcame-2"/> */}
+            <Webcam audio={false} ref={webcamRef} id="my-video-id" className="testImage"/>
             <div className="cam-footer">
               <div className="imageList">
                 <img src={require("./images/demo/big.gif")} alt="" className="addImage" id="addImage1"/>
@@ -123,7 +122,7 @@ const AddNewUser = (props) => {
             </div>
             <FileUpload uploadImages={uploadImages} />
           </div>
-            
+
         </div>
       </div>
     </>
