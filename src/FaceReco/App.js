@@ -6,7 +6,7 @@ import captureVideoFrame from "capture-video-frame";
 import queryString from 'query-string';
 import AddNewUser from "./AddNewUser";
 import DotLoader from "react-spinners/DotLoader";
-import { ToastContainer, toast } from 'react-toastify';
+import NotificationSystem from 'react-notification-system';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./Navbar.js";
 import { css } from '@emotion/core';
@@ -32,7 +32,19 @@ function App(props) {
   const [isLoading, showLoader] = React.useState(false);
   const [name, setName] = React.useState('');
   const [newUser, addNewUser] = React.useState(false);
+  const notificationSystem = React.useRef(null);
+  const style = {
+    NotificationItem: { // Override the notification item
+      DefaultStyle: { // Applied to every notification, regardless of the notification level
+        margin: '10px 5px 2px 1px',
+        height:'50px'
+      },
 
+      success: { // Applied only to the success notification item
+        color: 'blue'
+      }
+    }
+  }
 
   const handleStartCaptureClick = () => {
     const frame = captureVideoFrame("my-video-id", "png");
@@ -50,16 +62,12 @@ function App(props) {
       .then(function (response) {
         showLoader(false);
         const result = response.data;
-        toast('🦄 Welcome '+ result.name, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          type: 'info'
-          });
+        const notification = notificationSystem.current;
+
+        notification.addNotification({
+        message: 'Notification message',
+        level: 'success'
+      });
         setName(result.name);
       })
       .catch(function (error) {
@@ -92,6 +100,7 @@ function App(props) {
 
   return (
     <>
+    <NotificationSystem ref={notificationSystem}  style={style}/>
     <Navbar history={props.history}  addNewUserMethod={addNewUserMethod} back={back}/>
     {
       capturing && !newUser &&
@@ -117,20 +126,6 @@ function App(props) {
 
     { !newUser &&
       <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        style={{height: '100px'}}
-        />
-      <ToastContainer />
-
         <DotLoader
              css={override}
              sizeUnit={"px"}

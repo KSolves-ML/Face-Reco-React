@@ -8,6 +8,8 @@ import { css } from '@emotion/core';
 import {AddPhotoAlternate, Compare} from '@material-ui/icons';
 import FileUpload from "./FileUpload";
 import { ToastContainer, toast } from 'react-toastify';
+import NotificationSystem from 'react-notification-system';
+
 import 'react-toastify/dist/ReactToastify.css';
 const override = css`
 display: block;
@@ -27,7 +29,19 @@ const AddNewUser = (props) => {
   const [isLoading, showLoader] = React.useState(false);
   const [images, addImage] = React.useState([]);
   const [newUserName, setUserName] = React.useState('');
+  const notificationSystem = React.useRef(null);
 
+  const style = {
+  NotificationItem: { // Override the notification item
+    DefaultStyle: { // Applied to every notification, regardless of the notification level
+      margin: '10px 5px 2px 1px'
+    },
+
+    success: { // Applied only to the success notification item
+      color: 'red'
+    }
+  }
+}
   const addNewImage = () => {
     if (images.length === 4) {
       addImage([]);
@@ -55,17 +69,11 @@ const AddNewUser = (props) => {
       } else if (imageNo === 4) {
         imgCount = 'Four';
       }
-
-      toast(imgCount === 'One' ? imgCount + " Image Added" : imgCount +" Images Added" , {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        type: 'success'
-        });
+      const notification = notificationSystem.current;
+      notification.addNotification({
+        message: imgCount === 'One' ? imgCount + " Image Added" : imgCount +" Images Added",
+        level: 'info'
+      });
     }
   }
 
@@ -96,32 +104,13 @@ const AddNewUser = (props) => {
       } else {
         error = "Please add four user images."
       }
+      const notification = notificationSystem.current;
 
-      toast(error , {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        type: 'warning'
-        });
-    }
-  }
-
-
-  const createEmbeddings = () => {
-      showLoader(true);
-
-      axios.post("https://ml-demo.ksolves.com:5000/create_embeddings")
-      .then(function (response) {
-        showLoader(false);
-      })
-      .catch(function (error) {
-
-        showLoader(false)
+      notification.addNotification({
+        message: error,
+        level: 'info'
       });
+    }
   }
 
   const uploadImages = (imageList) => {
@@ -136,19 +125,7 @@ const AddNewUser = (props) => {
 
   return (
     <>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      style={{height: '100px'}}
-      />
-    <ToastContainer />
+    <NotificationSystem ref={notificationSystem}  style={style}/>
     <DotLoader
          css={override}
          sizeUnit={"px"}
