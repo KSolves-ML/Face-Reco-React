@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import Product from './Product';
-
+import menuIcon from '../images/menu.svg';
+import crossIcon from '../images/cross.svg';
 export class Dashboard extends Component {
   constructor() {
     super ()
     this.state  = {
-      selectedMenu: 'all'
+      isOpen : false,
+      selectedMenu: 'all',
     }
+
   }
 
   changeSection = (section) => {
     this.setState({
       selectedMenu: section
+    })
+  }
+  
+  changeMenuState = () => {
+    this.setState({
+      isOpen : !this.state.isOpen?true:false
     })
   }
 
@@ -21,17 +30,21 @@ export class Dashboard extends Component {
         <div className="container">
           <aside>
             <div className="logo">
-              <h3>KSOLVES</h3>
+              <a href=""><h3>KSOLVES</h3></a>
+              <button className={this.state.isOpen?'isOpen':'isClose'}  onClick={this.changeMenuState}><img src={menuIcon} class="open-ic" alt=""/><img src={crossIcon} class="close-ic" alt=""/></button>
             </div>
-            <ul>
-              <li><a onClick={() => {this.changeSection('all')}}>Machine Learning App</a></li>
-              <li><a onClick={() => {this.changeSection('nlp')}}>Natural language processing</a></li>
-              <li className="active"><a onClick={() => {this.changeSection('computerVision')}}>Computer vision </a>
-              </li>
-              <li><a href="">Traditional machine learning </a></li>
-              <li><a href="">Recommendation  system </a></li>
-            </ul>
+            <nav className={this.state.isOpen?'collapsed':''}>
+              <ul>
+                <li><a onClick={() => {this.changeSection('all')}}>Machine Learning App</a></li>
+                <li><a onClick={() => {this.changeSection('nlp')}}>Natural language processing</a></li>
+                <li className="active"><a onClick={() => {this.changeSection('computerVision')}}>Computer vision </a>
+                </li>
+                <li><a href="">Traditional machine learning </a></li>
+                <li><a href="">Recommendation  system </a></li>
+              </ul>
+            </nav>
           </aside>
+      
 
           {
             this.state.selectedMenu === 'all' &&
