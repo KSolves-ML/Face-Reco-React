@@ -6,7 +6,9 @@ import queryString from 'query-string';
 import DotLoader from "react-spinners/DotLoader";
 import { css } from '@emotion/core';
 import {AddPhotoAlternate, Compare} from '@material-ui/icons';
-import FileUpload from "./FileUpload"
+import FileUpload from "./FileUpload";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const override = css`
 display: block;
 margin: 0 auto;
@@ -38,11 +40,37 @@ const AddNewUser = (props) => {
     newImage.push(frame.dataUri);
     addImage(newImage);
     const imageNo = images.length+1
-    const img = document.getElementById("addImage"+imageNo)
-    img.src = frame.dataUri
+
+    if (imageNo <= 4) {
+      const img = document.getElementById("addImage"+imageNo)
+      img.src = frame.dataUri;
+      let imgCount = '';
+
+      if (imageNo === 1) {
+        imgCount = 'One';
+      } else if (imageNo === 2) {
+        imgCount = 'Two';
+      } else if (imageNo === 3) {
+        imgCount = 'Three';
+      } else if (imageNo === 4) {
+        imgCount = 'Four';
+      }
+
+      toast(imgCount === 'One' ? imgCount + " Image Added" : imgCount +" Images Added" , {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: 'success'
+        });
+    }
   }
 
   const allignImages = () => {
+    if(images.length === 4) {
       const data = {
         file1: images[0],
         file2: images[1],
@@ -60,6 +88,26 @@ const AddNewUser = (props) => {
 
         showLoader(false)
       });
+    } else {
+      let error = '';
+
+      if (newUserName.length === 0) {
+        error = "Please enter the username.";
+      } else {
+        error = "Please add four user images."
+      }
+
+      toast(error , {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        type: 'warning'
+        });
+    }
   }
 
 
@@ -88,6 +136,19 @@ const AddNewUser = (props) => {
 
   return (
     <>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      style={{height: '100px'}}
+      />
+    <ToastContainer />
     <DotLoader
          css={override}
          sizeUnit={"px"}

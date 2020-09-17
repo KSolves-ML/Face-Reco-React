@@ -17,7 +17,7 @@ export class Dashboard extends Component {
       selectedMenu: section
     })
   }
-  
+
   changeMenuState = () => {
     this.setState({
       isOpen : !this.state.isOpen?true:false
@@ -31,20 +31,18 @@ export class Dashboard extends Component {
           <aside>
             <div className="logo">
               <a href=""><h3>KSOLVES</h3></a>
-              <button className={this.state.isOpen?'isOpen':'isClose'}  onClick={this.changeMenuState}><img src={menuIcon} class="open-ic" alt=""/><img src={crossIcon} class="close-ic" alt=""/></button>
+              <button className={this.state.isOpen?'isOpen':'isClose'}  onClick={this.changeMenuState}><img src={menuIcon} className="open-ic" alt=""/><img src={crossIcon} className="close-ic" alt=""/></button>
             </div>
             <nav className={this.state.isOpen?'collapsed':''}>
               <ul>
-                <li><a onClick={() => {this.changeSection('all')}}>Machine Learning App</a></li>
-                <li><a onClick={() => {this.changeSection('nlp')}}>Natural language processing</a></li>
-                <li className="active"><a onClick={() => {this.changeSection('computerVision')}}>Computer vision </a>
+                <li className="active"><a onClick={() => {this.changeSection('all')}}>Machine Learning App</a></li>
+                <li><a onClick={() => {this.changeSection('computerVision')}}>Computer vision </a>
                 </li>
-                <li><a href="">Traditional machine learning </a></li>
-                <li><a href="">Recommendation  system </a></li>
+                <li><a onClick={() => {this.changeSection('nlp')}}>Natural language processing</a></li>
               </ul>
             </nav>
           </aside>
-      
+
 
           {
             this.state.selectedMenu === 'all' &&

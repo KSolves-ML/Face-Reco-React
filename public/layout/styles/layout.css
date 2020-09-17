@@ -63,7 +63,7 @@ body{
 
 .dark-bg #featured_slide_Content .featured_slide_Image .introtext {
   opacity: 1;
-  background: #fff;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   top: 440px;
   border-radius: 0 0 5px 5px;
   padding-left: 20px;
@@ -121,7 +121,7 @@ body{
   width: 25%;
   -o-object-fit: cover;
      object-fit: cover;
-     
+
 }
 .dark-bg .cam-footer .imageList .addImage.invert{filter: invert();}
 .dark-bg .cam-footer .input-outer input {
@@ -672,7 +672,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 }
 #progressbar li:first-child:after {
   /*connector not needed before the first step*/
-  content: none; 
+  content: none;
 }
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/

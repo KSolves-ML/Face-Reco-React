@@ -6,8 +6,13 @@ import captureVideoFrame from "capture-video-frame";
 import queryString from 'query-string';
 import AddNewUser from "./AddNewUser";
 import DotLoader from "react-spinners/DotLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./Navbar.js";
 import { css } from '@emotion/core';
+import { Link } from 'react-router-dom';
+
+
 const override = css`
 display: block;
 margin: 0 auto;
@@ -45,6 +50,16 @@ function App(props) {
       .then(function (response) {
         showLoader(false);
         const result = response.data;
+        toast('🦄 Welcome '+ result.name, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          type: 'info'
+          });
         setName(result.name);
       })
       .catch(function (error) {
@@ -53,23 +68,10 @@ function App(props) {
     }
   };
 
-
-  const liveCamera = (event) => {
-    event.preventDefault();
-    showLoader(true)
-    axios.post("https://ml-demo.ksolves.com:5000/facerecognitionLive")
-    .then(function (response) {
-      showLoader(false)
-    })
-    .catch(function (error) {
-      showLoader(false)
-      console.log(error);
-    });
-  }
-
   const addNewUserMethod = (event, value) => {
     event.preventDefault()
     addNewUser(value);
+    setCapturing(false);
   }
 
   useEffect(() => {
@@ -82,12 +84,53 @@ function App(props) {
     document.body.appendChild(script);
   });
 
+  const back = () => {
+    setCapturing(true);
+    addNewUser(false);
+
+  }
+
   return (
     <>
-    <Navbar history={props.history}  addNewUserMethod={addNewUserMethod}/>
+    <Navbar history={props.history}  addNewUserMethod={addNewUserMethod} back={back}/>
+    {
+      capturing && !newUser &&
+      <form action="" className="steps">
+        <ul id="progressbar">
+          <li className="active">Align Face On Camera</li>
+          <li className="active">Click On Capture Button</li>
+        </ul>
+      </form>
+    }
+
+    {
+      newUser && !capturing &&
+      <form action="" className="steps">
+        <ul id="progressbar">
+          <li className="active">Add new user name in the input box.</li>
+          <li className="active">Align your face on camera</li>
+          <li className="active">Capture four images of new user</li>
+          <li className="active">Click on start training button</li>
+        </ul>
+      </form>
+    }
 
     { !newUser &&
       <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{height: '100px'}}
+        />
+      <ToastContainer />
+
         <DotLoader
              css={override}
              sizeUnit={"px"}
@@ -113,17 +156,28 @@ function App(props) {
                     !capturing &&
                     <>
                       <div>
-                        <button className="button1" style={{float: 'left'}} onClick={() => {setCapturing(true)}}>Capture Image</button>
-                        <button className="button1" style={{float: 'right'}} onClick={liveCamera}>Live Camera</button>
+                        <Link to="/"><button className="button1" style={{float: 'left', width: '100px', paddingLeft: '30px'}}>Back</button></Link>
+                        <button className="button1" style={{float: 'right', width: '100px', paddingLeft: '30px'}} onClick={() => {setCapturing(true)}}>Next</button>
                       </div>
                     </>
                   }
 
                   {
                     capturing &&
-                    <button className="button1" onClick={handleStartCaptureClick}>Capture</button>
+                    <>
+                      <Link to="/"><button className="button1" style={{float: 'left', width: '100px', paddingLeft: '30px'}}>Back</button></Link>
+                      <button className="button1" onClick={handleStartCaptureClick} style={{float: 'right', width: '100px', paddingLeft: '30px'}}>Capture</button>
+                    </>
                   }
+                  {
+                    !capturing &&
                     <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
+                  }
+                  {
+                    capturing &&
+                    <p style={{fontSize: '20px', fontWeight: 'bold'}}>FACE RECOGNITION</p>
+                  }
+
                   </div>
                 </li>
                 <li className="clear featured_slide_Image">
