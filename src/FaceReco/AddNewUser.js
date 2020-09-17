@@ -78,7 +78,7 @@ const AddNewUser = (props) => {
   }
 
   const allignImages = () => {
-    if(images.length === 4) {
+    if(images.length === 4 && newUserName.length !== 0) {
       const data = {
         file1: images[0],
         file2: images[1],
@@ -90,26 +90,52 @@ const AddNewUser = (props) => {
 
       axios.post("https://ml-demo.ksolves.com:5000/align_images",queryString.stringify(data))
       .then(function (response) {
+        const notification = notificationSystem.current;
+
+        notification.addNotification({
+          message: "New user added successfully.",
+          level: 'info'
+        });
+
+        for (let i=1; i<=4; i++) {
+          const img = document.getElementById("addImage"+i)
+          img.src = require("../images/demo/big.gif");
+        }
+        setUserName("");
+        addImage([]);
         showLoader(false);
       })
       .catch(function (error) {
+        const notification = notificationSystem.current;
 
+        notification.addNotification({
+          message: "Something went wrong",
+          level: 'info'
+        });
         showLoader(false)
       });
     } else {
       let error = '';
 
-      if (newUserName.length === 0) {
-        error = "Please enter the username.";
-      } else {
-        error = "Please add four user images."
-      }
-      const notification = notificationSystem.current;
+      if (images.length < 4) {
+        error = "Please add four user images.";
+        const notification = notificationSystem.current;
 
-      notification.addNotification({
-        message: error,
-        level: 'info'
-      });
+        notification.addNotification({
+          message: error,
+          level: 'info'
+        });
+      }
+
+      if (newUserName.length === 0) {
+        const error = "Please enter the username.";
+        const notification = notificationSystem.current;
+
+        notification.addNotification({
+          message: error,
+          level: 'info'
+        });
+      }
     }
   }
 
