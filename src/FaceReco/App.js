@@ -65,7 +65,7 @@ function App(props) {
         const notification = notificationSystem.current;
 
         notification.addNotification({
-        message: 'Notification message',
+        message: result.name,
         level: 'success'
       });
         setName(result.name);
