@@ -166,6 +166,7 @@ body{
   margin-right: 10px;
 }
 .btn{
+  cursor: pointer;
   border: 0;
   padding: 10px 16px;
   display: flex;
