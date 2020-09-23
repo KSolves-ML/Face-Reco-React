@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./Navbar.js";
 import { css } from '@emotion/core';
 import { Link } from 'react-router-dom';
-
+import {ArrowBackRounded,ErrorOutline,AddAPhoto, ArrowForwardRounded} from '@material-ui/icons';
 
 const override = css`
 display: block;
@@ -133,51 +133,46 @@ function App(props) {
              loading={isLoading}
              color={'yellow'}
            />
-          <div className="wrapper col2">
-            <div className="dark-bg" id="featured_slide_">
-              <ul id="featured_slide_Content">
-                <li className="featured_slide_Image">
-                {
-                  capturing &&
-                  <Webcam audio={false} ref={webcamRef} id="my-video-id" className="float-left"/>
-
-                }
-                {
-                  !capturing &&
-                  <img src={require("../images/demo/big.gif")} />
-                }
+          <div className="feature-slides">
+            <div class="wrapper">
+              <div className="feature-slide">
+                  {
+                    capturing &&
+                    <Webcam audio={false} ref={webcamRef} id="my-video-id" className="float-left"/>
+                  }
+                  {
+                    !capturing &&
+                    <img src={require("../images/demo/big.gif")} />
+                  }
                   <div className="introtext">
-                  {
-                    !capturing &&
-                    <>
-                      <div>
-                        <Link to="/"><button className="button1" style={{float: 'left', width: '100px', paddingLeft: '30px'}}>Back</button></Link>
-                        <button className="button1" style={{float: 'right', width: '100px', paddingLeft: '30px'}} onClick={() => {setCapturing(true)}}>Next</button>
+                    {
+                      !capturing &&
+                      <>
+                        <div className="button-group">
+                          <Link to="/"><button className="btn dark"> <ArrowBackRounded/> <span>Back</span></button></Link>
+                          <button className="btn purple-gradient" onClick={() => {setCapturing(true)}}><span>Next</span><ArrowForwardRounded/></button>
+                        </div>
+                      </>
+                    }
+                    {
+                      capturing &&
+                      <>
+                      <div className="button-group">
+                        <Link to="/"><button className="btn dark"><ArrowBackRounded/> <span>Back</span></button></Link>
+                        <button className="btn purple-gradient" onClick={handleStartCaptureClick} ><AddAPhoto/><span>&nbsp;Capture</span></button>
                       </div>
-                    </>
-                  }
-
-                  {
-                    capturing &&
-                    <>
-                      <Link to="/"><button className="button1" style={{float: 'left', width: '100px', paddingLeft: '30px'}}>Back</button></Link>
-                      <button className="button1" onClick={handleStartCaptureClick} style={{float: 'right', width: '100px', paddingLeft: '30px'}}>Capture</button>
-                    </>
-                  }
-                  {
-                    !capturing &&
-                    <p style={{fontSize: '20px', fontWeight: 'bold'}}>Please try to capture image within proper brightness.</p>
-                  }
-                  {
-                    capturing &&
-                    <p style={{fontSize: '20px', fontWeight: 'bold'}}>FACE RECOGNITION</p>
-                  }
-
+                      </>
+                    }
+                    {
+                      !capturing &&
+                      <p class="info-text"><ErrorOutline/><span>Please try to capture image within proper brightness.</span></p>
+                    }
+                    {
+                      capturing &&
+                      <p class="info-text">FACE RECOGNITION</p>
+                    }
                   </div>
-                </li>
-                <li className="clear featured_slide_Image">
-                </li>
-              </ul>
+              </div>
             </div>
             {
               name && name.length > 0 && name !== 'Unknown' &&

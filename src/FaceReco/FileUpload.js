@@ -20,7 +20,7 @@ function FileUpload(props) {
   };
 
   return (
-    <div>
+    <div className="button-group-inner">
       <ImageUploading
         multiple
         value={images}
@@ -40,7 +40,7 @@ function FileUpload(props) {
           // write your building UI
           <div className="upload__image-wrapper">
             <button
-              className="button" 
+              className="btn purple-gradient" 
               style={isDragging ? { color: "red" } : null}
               onClick={onImageUpload}
               {...dragProps}
@@ -49,7 +49,7 @@ function FileUpload(props) {
               <span>Click or Drop here</span>
             </button>
             
-            <button className="button"  onClick={onImageRemoveAll}> <DeleteForever/> <span>Remove all images</span></button>
+            <button className="btn purple-gradient"  onClick={onImageRemoveAll}> <DeleteForever/> <span>Remove all images</span></button>
             <div className="images">
               {imageList.map((image, index) => (
                 <div key={index} className="image-item">

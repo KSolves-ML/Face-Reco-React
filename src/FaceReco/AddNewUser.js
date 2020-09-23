@@ -159,8 +159,8 @@ const AddNewUser = (props) => {
          loading={isLoading}
          color={'yellow'}
        />
-      <div id="container">
-        <div className="dark-bg">
+      <div className="wrapper">
+        <div className="white-bg">
           <div className="left-frame">
             <Webcam audio={false} ref={webcamRef} id="my-video-id" className="testImage"/>
             <div className="cam-footer">
@@ -176,9 +176,9 @@ const AddNewUser = (props) => {
             </div>
           </div>
           <div className="button-group">
-            <div>
-              <button className="button" onClick={addNewImage}><AddPhotoAlternate/> <span>Add Image</span></button>
-              <button className="button" onClick={allignImages}><Compare/> <span>Start Training</span></button>
+            <div className="button-group-inner">
+              <button className="btn purple-gradient" onClick={addNewImage}><AddPhotoAlternate/> <span>Add Image</span></button>
+              <button className="btn purple-gradient" onClick={allignImages}><Compare/> <span>Start Training</span></button>
             </div>
             <FileUpload uploadImages={uploadImages} />
           </div>
