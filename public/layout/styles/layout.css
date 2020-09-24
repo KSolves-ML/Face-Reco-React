@@ -162,6 +162,18 @@ body{
   display: flex;
   padding: 10px 0 20px 0;
 }
+.dashboard-logo {
+  width: 78%;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.facereco-logo {
+  width: 65%;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
 .info-text svg{
   margin-right: 10px;
 }
@@ -489,7 +501,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
   color: #383846;
   font-weight: bold;
   font-size: 14px;
-  
+
 }
 #header #topnav ul li{
   display: inline-block;
@@ -910,4 +922,3 @@ ul#progressbar li:nth-of-type(3):after {
   width: 100%;
 
 }
-

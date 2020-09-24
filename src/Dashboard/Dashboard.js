@@ -30,7 +30,7 @@ export class Dashboard extends Component {
         <div className="container">
           <aside>
             <div className="logo">
-              <a href=""><h3>KSOLVES</h3></a>
+              <a href=""><img className="dashboard-logo" src={require("../images0/ksolvesLogo.png")} /> </a>
               <button className={this.state.isOpen?'isOpen':'isClose'}  onClick={this.changeMenuState}><img src={menuIcon} className="open-ic" alt=""/><img src={crossIcon} className="close-ic" alt=""/></button>
             </div>
             <nav className={this.state.isOpen?'collapsed':''}>
@@ -70,7 +70,7 @@ export class Dashboard extends Component {
             this.state.selectedMenu === 'computerVision' &&
             <section>
               <h2 className="heading">Computer Vision</h2>
-              <p className="subHeading">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+              <p className="subHeading">Computer vision is the field of computer science that focuses on replicating parts of the complexity of the human vision system and enabling computers to identify and process objects in images and videos in the same way that humans do.</p>
               <div className="products">
                 <Product
                 src="https://miro.medium.com/max/660/1*enzZrRQ_EwtfJJKOffrcFg.png"
@@ -86,7 +86,7 @@ export class Dashboard extends Component {
             this.state.selectedMenu === 'nlp' &&
               <section>
                 <h2 className="heading">Natural Language Processing</h2>
-                <p className="subHeading">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p className="subHeading">Natural Language Processing, or NLP, is the sub-field of AI that is focused on enabling computers to understand and process human languages..</p>
                 <div className="products">
                   <Product
                   src="https://miro.medium.com/max/2560/0*BxWu-Frzzc4lk_qT.png"

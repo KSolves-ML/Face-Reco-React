@@ -13,7 +13,7 @@ const Navbar = (props) => {
       <div className="wrapper">
         <div className="logo">
           <div className="logo-inner">
-            <h1><a href="#">KSOLVES</a></h1>
+            <img className="facereco-logo" src={require("../images0/ksolvesLogo.png")} />
             <p>FACE RECOGNITION</p>
           </div>
           <div className="menu-trigger">

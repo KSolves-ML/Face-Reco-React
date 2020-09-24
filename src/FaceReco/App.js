@@ -82,16 +82,6 @@ function App(props) {
     setCapturing(false);
   }
 
-  useEffect(() => {
-  // Update the document title using the browser API
-    const script = document.createElement("script");
-
-    script.src = "layout/scripts/slider.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-  });
-
   const back = () => {
     setCapturing(true);
     addNewUser(false);
@@ -165,11 +155,11 @@ function App(props) {
                     }
                     {
                       !capturing &&
-                      <p class="info-text"><ErrorOutline/><span>Please try to capture image within proper brightness.</span></p>
+                      <p className="info-text"><ErrorOutline/><span>Please try to capture image within proper brightness.</span></p>
                     }
                     {
                       capturing &&
-                      <p class="info-text">FACE RECOGNITION</p>
+                      <p className="info-text">FACE RECOGNITION</p>
                     }
                   </div>
               </div>
